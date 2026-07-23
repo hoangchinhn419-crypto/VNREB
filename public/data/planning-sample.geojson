@@ -1,0 +1,56 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "QH-001",
+        "name": "Khu dân cư hiện hữu chỉnh trang",
+        "category": "RESIDENTIAL",
+        "color": "#a855f7",
+        "source": "Dữ liệu minh họa VREB",
+        "updatedAt": "2026-07-01",
+        "confidence": 82,
+        "note": "Lớp mẫu phục vụ kiểm thử giao diện, không phải dữ liệu pháp lý chính thức."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[106.6402,10.8498],[106.6508,10.8481],[106.6542,10.8564],[106.6472,10.8612],[106.6389,10.8571],[106.6402,10.8498]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "QH-002",
+        "name": "Đất hỗn hợp thương mại - dịch vụ",
+        "category": "MIXED_USE",
+        "color": "#f59e0b",
+        "source": "Dữ liệu minh họa VREB",
+        "updatedAt": "2026-07-01",
+        "confidence": 76,
+        "note": "Cần đối chiếu hồ sơ quy hoạch được cơ quan có thẩm quyền cung cấp."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[106.6590,10.8425],[106.6667,10.8445],[106.6686,10.8518],[106.6632,10.8552],[106.6573,10.8500],[106.6590,10.8425]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "QH-003",
+        "name": "Hành lang giao thông dự kiến",
+        "category": "TRANSPORT",
+        "color": "#ef4444",
+        "source": "Dữ liệu minh họa VREB",
+        "updatedAt": "2026-07-01",
+        "confidence": 70,
+        "note": "Vùng minh họa để kiểm thử cảnh báo giao cắt."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[106.6330,10.8460],[106.6720,10.8590],[106.6727,10.8570],[106.6338,10.8440],[106.6330,10.8460]]]
+      }
+    }
+  ]
+}
