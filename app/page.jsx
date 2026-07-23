@@ -3,8 +3,9 @@ import { useMemo, useState } from "react";
 import PlanningMap from "../components/PlanningMap";
 import VnrebBrand from "../components/VnrebBrand";
 import VnrebAiChat from "../components/VnrebAiChat";
+import MotionRuntime from "../components/MotionRuntime";
 import {
-  ArrowRight, Bot, Building2, CheckCircle2, ChevronRight, Compass, FileCheck2,
+  ArrowRight, Bot, Building2, CheckCircle2, ChevronRight, Compass, FileCheck2, Play, Layers3, Radar,
   Heart, House, Map, MapPin, Menu, MessageCircleMore, Search, ShieldCheck,
   Sparkles, Star, TrendingUp, Users, X
 } from "lucide-react";
@@ -70,6 +71,7 @@ export default function Home(){
   const toggleFav=id=>setFavs(v=>v.includes(id)?v.filter(x=>x!==id):[...v,id]);
 
   return <main>
+    <MotionRuntime/>
     <header className="header">
       <nav className="container nav">
         <Brand/>
@@ -86,41 +88,51 @@ export default function Home(){
       {menu&&<div className="mobileMenu"><a href="#projects">Dự án</a><a href="#map">Bản đồ</a><a href="#planning">Quy hoạch</a><a href="#knowledge">Kiến thức</a><a href="/ho-so-nang-luc">Về VNREB</a></div>}
     </header>
 
-    <section className="hero heroV7">
-      <div className="ambient a1"/><div className="ambient a2"/>
-      <div className="container heroInner heroV7Inner">
-        <div className="heroBadge"><Sparkles size={15}/> Nền tảng bất động sản vận hành bằng AI</div>
-        <h1>Tìm đúng bất động sản.<span> Hiểu rõ trước khi quyết định.</span></h1>
-        <p>Kết nối dữ liệu dự án, giá bán, quy hoạch, pháp lý và tư vấn chuyên gia trong một trải nghiệm thống nhất.</p>
-        <div className="searchBox">
-          <div className="searchMain"><Search size={20}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Tìm dự án, khu vực, loại hình hoặc nhu cầu..."/></div>
-          <select value={type} onChange={e=>setType(e.target.value)}><option>Tất cả</option><option>Căn hộ</option><option>Nhà phố</option><option>Nhà riêng</option><option>Đất nền</option></select>
-          <select value={budget} onChange={e=>setBudget(e.target.value)}><option>Tất cả</option><option>Dưới 3 tỷ</option><option>3–5 tỷ</option><option>Trên 5 tỷ</option></select>
-          <button><Search size={18}/> Tìm kiếm</button>
-        </div>
-        <div className="quickTags"><span>Gợi ý:</span><button onClick={()=>setQuery("Quận 12")}>Quận 12</button><button onClick={()=>setBudget("3–5 tỷ")}>Ngân sách 3–5 tỷ</button><button onClick={()=>setType("Nhà phố")}>Nhà phố</button></div>
-        <div className="heroStats">
-          <div><strong>1.280+</strong><span>Sản phẩm xác minh</span></div>
-          <div><strong>86</strong><span>Dự án đang mở bán</span></div>
-          <div><strong>9.400+</strong><span>Nhà đầu tư quan tâm</span></div>
-          <div><strong>24/7</strong><span>AI tư vấn</span></div>
-        </div>
-        <div className="heroV7Visual" aria-label="Không gian bất động sản VNREB">
-          <div className="heroV7Glass">
-            <span>VNREB MARKET INTELLIGENCE</span>
-            <b>Dữ liệu dự án · Quy hoạch · AI tư vấn</b>
-            <small>Thông tin quan trọng được gắn nguồn và cần chuyên viên xác minh.</small>
+    <section className="hero heroV71">
+      <div className="heroV71Aurora a"/><div className="heroV71Aurora b"/>
+      <div className="container heroV71Grid">
+        <div className="heroV71Copy" data-reveal>
+          <div className="heroBadge"><Sparkles size={15}/> Nền tảng bất động sản vận hành bằng AI</div>
+          <h1><span className="line">Tìm đúng bất động sản.</span><span className="line accent">Hiểu rõ trước khi quyết định.</span></h1>
+          <p>Kết nối dữ liệu dự án, giá bán, quy hoạch, pháp lý và tư vấn chuyên gia trong một trải nghiệm thống nhất.</p>
+          <div className="heroV71Pills">
+            <span><Radar/>AI phân tích thị trường</span><span><Layers3/>Quy hoạch đa lớp</span><span><ShieldCheck/>Dữ liệu có nguồn</span>
           </div>
+          <div className="searchBox heroV71Search">
+            <div className="searchMain"><Search size={20}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Tìm dự án, khu vực, loại hình hoặc nhu cầu..."/></div>
+            <select value={type} onChange={e=>setType(e.target.value)}><option>Tất cả</option><option>Căn hộ</option><option>Nhà phố</option><option>Nhà riêng</option><option>Đất nền</option></select>
+            <select value={budget} onChange={e=>setBudget(e.target.value)}><option>Tất cả</option><option>Dưới 3 tỷ</option><option>3–5 tỷ</option><option>Trên 5 tỷ</option></select>
+            <button><Search size={18}/> Tìm kiếm</button>
+          </div>
+          <div className="quickTags"><span>Tìm kiếm phổ biến:</span><button onClick={()=>setQuery("Quận 12")}>Quận 12</button><button onClick={()=>setBudget("3–5 tỷ")}>3–5 tỷ</button><button onClick={()=>setType("Nhà phố")}>Nhà phố</button></div>
+        </div>
+
+        <div className="heroV71Visual" data-reveal aria-label="Không gian đô thị AI VNREB">
+          <div className="heroV71Media"/>
+          <div className="scanLine"/>
+          <div className="projectHotspot hs1"><i/><div><b>THE RIVUS</b><span>Từ 150 tỷ · Quận 2</span></div></div>
+          <div className="projectHotspot hs2"><i/><div><b>THE BEVERLY</b><span>Từ 3,2 tỷ · Thủ Đức</span></div></div>
+          <div className="projectHotspot hs3"><i/><div><b>THE MANHATTAN</b><span>Từ 5,8 tỷ · Thủ Đức</span></div></div>
+          <div className="heroV71Mode"><span>Trải nghiệm dự án</span><div><button>2D</button><button className="active">3D</button><button><Play size={13}/> Video</button></div></div>
+          <div className="heroV71Glass"><span>VNREB MARKET INTELLIGENCE</span><b>Dữ liệu dự án · Quy hoạch · AI tư vấn</b><small>Thông tin quan trọng được gắn nguồn và cần chuyên viên xác minh.</small></div>
+        </div>
+
+        <div className="heroV71Stats" data-reveal>
+          <div><strong data-count="10000" data-suffix="+">0</strong><span>Dự án toàn quốc</span></div>
+          <div><strong data-count="500000" data-suffix="+">0</strong><span>Bất động sản</span></div>
+          <div><strong data-count="50" data-suffix="+">0</strong><span>Tỉnh thành</span></div>
+          <div><strong data-count="1" data-suffix="M+">0</strong><span>Lượt phân tích AI</span></div>
+          <div><strong data-count="99.9" data-suffix="%" data-decimals="1">0</strong><span>Dữ liệu chuẩn hóa</span></div>
         </div>
       </div>
     </section>
 
-    <section id="projects" className="section container">
+    <section id="projects" className="section container" data-reveal>
       <div className="sectionHead"><div><span className="eyebrow">DỰ ÁN NỔI BẬT</span><h2>Được AI chọn theo mục tiêu của bạn</h2><p>{filtered.length} lựa chọn đang phù hợp với bộ lọc.</p></div><button className="outline">Xem trên bản đồ <Map size={17}/></button></div>
       <div className="projectGrid">{filtered.map(p=><ProjectCard key={p.id} p={p} favs={favs} toggleFav={toggleFav}/>)}</div>
     </section>
 
-    <section id="map" className="section container">
+    <section id="map" className="section container" data-reveal>
       <div className="sectionHead">
         <div><span className="eyebrow">BẢN ĐỒ THỊ TRƯỜNG & QUY HOẠCH</span><h2>Khám phá vị trí trên bản đồ thật</h2><p>Kéo, phóng to, định vị và bật tắt lớp quy hoạch trực tiếp.</p></div>
         <a href="/ban-do-quy-hoach" className="outline">Mở toàn màn hình <Map size={17}/></a>
@@ -128,7 +140,7 @@ export default function Home(){
       <div className="homeRealMap"><PlanningMap compact/></div>
     </section>
 
-    <section id="planning" className="section container">
+    <section id="planning" className="section container" data-reveal>
       <div className="planningGrid">
         <div className="planningPreview">
           <div className="parcel"><span>Thửa 798</span></div>
@@ -144,7 +156,7 @@ export default function Home(){
       </div>
     </section>
 
-    <section className="section soft">
+    <section className="section soft" data-reveal>
       <div className="container">
         <div className="sectionHead"><div><span className="eyebrow">VÌ SAO CHỌN VNREB</span><h2>Một nền tảng, đầy đủ dữ liệu cần thiết</h2></div></div>
         <div className="benefits">
@@ -156,7 +168,7 @@ export default function Home(){
       </div>
     </section>
 
-    <section id="knowledge" className="section container">
+    <section id="knowledge" className="section container" data-reveal>
       <div className="sectionHead"><div><span className="eyebrow">KIẾN THỨC BẤT ĐỘNG SẢN</span><h2>Quyết định tốt hơn nhờ hiểu đúng</h2></div><a href="#">Xem tất cả <ChevronRight size={16}/></a></div>
       <div className="storyGrid">{stories.map((s,i)=><article key={s.title}><div className={`storyVisual s${i+1}`}><House/></div><div className="storyBody"><span>{s.cat}</span><h3>{s.title}</h3><small>{s.time}</small></div></article>)}</div>
     </section>

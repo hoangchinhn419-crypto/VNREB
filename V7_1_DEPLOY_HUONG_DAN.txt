@@ -1,0 +1,18 @@
+VNREB V7.1 MOTION PREMIUM AI
+
+Nâng cấp chính:
+- Hero đô thị AI độ phân giải cao
+- Cinematic zoom, parallax chuột, scan line
+- Hotspot dự án chuyển động
+- Counter số liệu tự chạy
+- Reveal section khi cuộn
+- AI launcher và panel animation
+- Hover card cao cấp
+- Tôn trọng prefers-reduced-motion
+
+DEPLOY:
+1. Upload toàn bộ nội dung thư mục lên GitHub repository hiện tại.
+2. Commit: Upgrade VNREB V7.1 Motion Premium AI
+3. Render > Manual Deploy > Clear build cache & deploy.
+4. Không xóa PostgreSQL hoặc Environment Variables.
+5. Sau deploy bấm Ctrl+Shift+R hoặc mở tab ẩn danh.

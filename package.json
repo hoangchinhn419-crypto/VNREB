@@ -1,6 +1,6 @@
 {
-  "name": "vnreb-v7-premium-real-estate-ai",
-  "version": "7.0.0",
+  "name": "vnreb-v7-1-motion-premium-ai",
+  "version": "7.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
