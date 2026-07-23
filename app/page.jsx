@@ -86,9 +86,9 @@ export default function Home(){
       {menu&&<div className="mobileMenu"><a href="#projects">Dự án</a><a href="#map">Bản đồ</a><a href="#planning">Quy hoạch</a><a href="#knowledge">Kiến thức</a><a href="/ho-so-nang-luc">Về VNREB</a></div>}
     </header>
 
-    <section className="hero">
+    <section className="hero heroV7">
       <div className="ambient a1"/><div className="ambient a2"/>
-      <div className="container heroInner">
+      <div className="container heroInner heroV7Inner">
         <div className="heroBadge"><Sparkles size={15}/> Nền tảng bất động sản vận hành bằng AI</div>
         <h1>Tìm đúng bất động sản.<span> Hiểu rõ trước khi quyết định.</span></h1>
         <p>Kết nối dữ liệu dự án, giá bán, quy hoạch, pháp lý và tư vấn chuyên gia trong một trải nghiệm thống nhất.</p>
@@ -104,6 +104,13 @@ export default function Home(){
           <div><strong>86</strong><span>Dự án đang mở bán</span></div>
           <div><strong>9.400+</strong><span>Nhà đầu tư quan tâm</span></div>
           <div><strong>24/7</strong><span>AI tư vấn</span></div>
+        </div>
+        <div className="heroV7Visual" aria-label="Không gian bất động sản VNREB">
+          <div className="heroV7Glass">
+            <span>VNREB MARKET INTELLIGENCE</span>
+            <b>Dữ liệu dự án · Quy hoạch · AI tư vấn</b>
+            <small>Thông tin quan trọng được gắn nguồn và cần chuyên viên xác minh.</small>
+          </div>
         </div>
       </div>
     </section>

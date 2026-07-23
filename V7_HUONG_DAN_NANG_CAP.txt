@@ -1,0 +1,15 @@
+VNREB V7 PREMIUM REAL ESTATE AI
+
+ĐÃ NÂNG CẤP
+- Trả lại hình ảnh bất động sản cao cấp ở trang chủ và trang đăng ký/đăng nhập.
+- Ảnh nền sạch, không có chữ chồng.
+- Hero trang chủ có ảnh dự án, card dữ liệu và CTA tìm kiếm.
+- Khung AI gọn hơn, prompt dễ đọc, mobile tốt hơn.
+- Giữ nguyên PostgreSQL, JWT, đăng ký/đăng nhập, OpenAI API và Render.
+
+CÁCH DEPLOY
+1. Giải nén.
+2. Upload toàn bộ nội dung lên đúng GitHub repository hiện tại, ghi đè file cũ.
+3. Commit changes.
+4. Render > Manual Deploy > Clear build cache & deploy.
+5. Không xóa database và không đổi Environment Variables.

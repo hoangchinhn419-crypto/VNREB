@@ -1,6 +1,6 @@
 {
-  "name": "vnreb-v6-premium-ai-render",
-  "version": "6.1.0",
+  "name": "vnreb-v7-premium-real-estate-ai",
+  "version": "7.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",

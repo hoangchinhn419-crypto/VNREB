@@ -18,7 +18,7 @@ export default function VnrebAiChat({ onSearchSuggestion }) {
     {
       role: "assistant",
       content:
-        "Xin chào, tôi là Trợ lý VNREB AI. Tôi có thể hỗ trợ tìm sản phẩm, so sánh phương án đầu tư và chuẩn bị checklist pháp lý. Các kết luận quy hoạch, giá và pháp lý quan trọng vẫn cần chuyên viên xác minh."
+        "Xin chào, tôi là Trợ lý VNREB AI. Tôi có thể tìm sản phẩm theo ngân sách, so sánh phương án đầu tư, giải thích dữ liệu dự án và chuẩn bị checklist pháp lý. Các kết luận quy hoạch, giá và pháp lý quan trọng vẫn cần chuyên viên VNREB xác minh."
     }
   ]);
   const scrollRef = useRef(null);
