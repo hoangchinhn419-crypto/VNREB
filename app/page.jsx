@@ -2,6 +2,7 @@
 import { useMemo, useState } from "react";
 import PlanningMap from "../components/PlanningMap";
 import VnrebBrand from "../components/VnrebBrand";
+import VnrebAiChat from "../components/VnrebAiChat";
 import {
   ArrowRight, Bot, Building2, CheckCircle2, ChevronRight, Compass, FileCheck2,
   Heart, House, Map, MapPin, Menu, MessageCircleMore, Search, ShieldCheck,
@@ -56,7 +57,6 @@ export default function Home(){
   const [type,setType]=useState("Tất cả");
   const [budget,setBudget]=useState("Tất cả");
   const [favs,setFavs]=useState([]);
-  const [aiOpen,setAiOpen]=useState(false);
   const [leadSent,setLeadSent]=useState(false);
 
   const filtered=useMemo(()=>projects.filter(p=>{
@@ -171,7 +171,6 @@ export default function Home(){
       <div className="container copyright">© 2026 VNREB.JSC · Thông tin trên website mang tính tham khảo.</div>
     </footer>
 
-    <button className="aiFab" onClick={()=>setAiOpen(!aiOpen)}><Bot/></button>
-    {aiOpen&&<div className="aiBox"><div className="aiHead"><span><Sparkles/> Trợ lý VNREB AI</span><button onClick={()=>setAiOpen(false)}><X/></button></div><div className="aiBody"><p>Chào anh/chị, tôi có thể giúp tìm sản phẩm, so sánh dự án hoặc kiểm tra các bước pháp lý.</p><button onClick={()=>setQuery("Nhà phố 3–5 tỷ")}>Tìm nhà phố 3–5 tỷ</button><button>So sánh 2 dự án</button><button>Kiểm tra quy hoạch</button></div><div className="aiInput"><input placeholder="Nhập câu hỏi..."/><button><ArrowRight/></button></div></div>}
+    <VnrebAiChat onSearchSuggestion={(value)=>{ if(value==="3–5 tỷ") setBudget("3–5 tỷ"); }} />
   </main>
 }

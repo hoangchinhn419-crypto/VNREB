@@ -64,3 +64,15 @@ GET /api/public/planning/layers
 POST /api/public/planning/query-point
 POST /api/public/planning/query-parcel
 ```
+
+
+## OpenAI API
+
+Thêm trên Render Web Service → Environment:
+
+```text
+OPENAI_API_KEY=sk-...
+OPENAI_MODEL=gpt-5-mini
+```
+
+Không đặt API key trong biến `NEXT_PUBLIC_*`, mã nguồn trình duyệt hoặc GitHub. Trợ lý gọi OpenAI qua route server `/api/ai/chat`, dùng Responses API và `store:false`.

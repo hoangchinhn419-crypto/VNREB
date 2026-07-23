@@ -1,0 +1,21 @@
+VNREB V6 PREMIUM AI - CÁCH UPDATE
+
+1. Giải nén file ZIP.
+2. Upload toàn bộ FILE VÀ THƯ MỤC BÊN TRONG lên repository GitHub VNREB hiện tại.
+3. Ghi đè các file trùng tên. Không upload nguyên file ZIP.
+4. Không xóa Render Web Service và PostgreSQL hiện tại.
+5. Render Environment giữ:
+   PORT=10000
+   HOSTNAME=0.0.0.0
+   NODE_ENV=production
+   DATABASE_URL=Internal Database URL
+   JWT_SECRET=chuỗi bí mật
+   ADMIN_SETUP_CODE=mã quản trị
+   OPENAI_API_KEY=API key OpenAI
+   OPENAI_MODEL=gpt-5-mini
+6. Render > Manual Deploy > Clear build cache & deploy.
+7. Kiểm tra:
+   /api/health
+   /dang-ky
+   /dang-nhap
+   /quan-tri
