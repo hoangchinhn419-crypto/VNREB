@@ -118,3 +118,66 @@ body{font-family:"Segoe UI",Roboto,Helvetica,Arial,sans-serif;text-rendering:opt
 .premiumAuthVisual{background:#06111f url("/brand/v72-city-clean.jpg") center/cover no-repeat!important}
 .premiumAuthVisual:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,13,28,.91),rgba(4,18,38,.62));pointer-events:none}
 .visualContent{z-index:3}
+
+/* VNREB UI PATCH V7.3 — CINEMATIC HERO MOTION ONLY */
+.heroV72Image{
+  background-image:url('/brand/v73-city-cinematic.jpg')!important;
+  background-position:center 42%!important;
+  filter:saturate(.98) contrast(1.08) brightness(.88)!important;
+  animation:v73CinematicPan 16s ease-in-out infinite alternate!important;
+  will-change:transform,filter;
+}
+.heroV72Visual{isolation:isolate;background:#07172d!important}
+.heroV72Visual:after{
+  content:"";
+  position:absolute;
+  z-index:4;
+  width:34%;
+  height:160%;
+  top:-30%;
+  left:-48%;
+  background:linear-gradient(90deg,transparent,rgba(111,205,255,.12),rgba(245,194,77,.18),transparent);
+  transform:rotate(14deg);
+  filter:blur(10px);
+  animation:v73LightSweep 7.2s ease-in-out infinite;
+  pointer-events:none;
+}
+.heroV72GridLines{opacity:.14!important;animation:v73GridDrift 18s linear infinite}
+.heroV72Scan{height:3px!important;box-shadow:0 0 30px rgba(86,203,255,.92)!important;animation:v73ScanStrong 4.8s linear infinite!important}
+.heroV72Hotspot{animation:v73HotspotFloat 3.2s ease-in-out infinite!important;border-color:rgba(255,214,112,.34)!important;background:rgba(4,17,35,.78)!important}
+.heroV72Hotspot.hot2{animation-delay:-1.05s!important}.heroV72Hotspot.hot3{animation-delay:-2.1s!important}
+.heroV72Hotspot i{width:10px!important;height:10px!important;animation:v73PulseStrong 1.55s ease-out infinite!important}
+.heroV72Panel{animation:v73PanelFloat 4.8s ease-in-out infinite;box-shadow:0 20px 55px rgba(0,0,0,.35)}
+.heroV72Copy h1{font-weight:800!important;letter-spacing:-2.2px!important}
+.heroV72Copy h1 span{animation:v73TextIn .75s cubic-bezier(.2,.8,.2,1) both!important}
+.heroV72Copy h1 strong{animation:v73TextIn .8s .13s cubic-bezier(.2,.8,.2,1) both!important;background:linear-gradient(100deg,#ffd66e,#f0b847 35%,#72d4ff 78%,#b99cff)!important;-webkit-background-clip:text!important;background-clip:text!important}
+.heroV72Search{animation:v73SearchFloat 4.4s ease-in-out infinite!important}
+.heroV72Visual{animation:v73HeroEnter .9s .12s cubic-bezier(.18,.8,.25,1) both}
+
+@keyframes v73CinematicPan{
+  0%{transform:scale(1.05) translate3d(-1.2%,0,0);filter:saturate(.96) contrast(1.07) brightness(.85)}
+  50%{transform:scale(1.095) translate3d(.7%,-.8%,0);filter:saturate(1.03) contrast(1.09) brightness(.91)}
+  100%{transform:scale(1.13) translate3d(-.4%,.5%,0);filter:saturate(1.01) contrast(1.1) brightness(.88)}
+}
+@keyframes v73LightSweep{0%,18%{left:-48%;opacity:0}28%{opacity:.85}68%{opacity:.7}82%,100%{left:120%;opacity:0}}
+@keyframes v73GridDrift{to{background-position:92px 46px,46px 92px}}
+@keyframes v73ScanStrong{0%{top:3%;opacity:0}8%{opacity:1}90%{opacity:1}100%{top:94%;opacity:0}}
+@keyframes v73HotspotFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-10px) scale(1.025)}}
+@keyframes v73PulseStrong{0%{box-shadow:0 0 0 0 rgba(241,189,67,.8),0 0 16px rgba(241,189,67,.9)}75%{box-shadow:0 0 0 17px rgba(241,189,67,0),0 0 26px rgba(241,189,67,.35)}100%{box-shadow:0 0 0 0 rgba(241,189,67,0)}}
+@keyframes v73PanelFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes v73TextIn{from{opacity:0;transform:translateY(34px);filter:blur(8px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes v73SearchFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes v73HeroEnter{from{opacity:0;transform:translateY(34px) scale(.965)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+@media(max-width:760px){
+  .heroV72Image{animation:v73MobilePan 12s ease-in-out infinite alternate!important}
+  .heroV72Visual:after{animation-duration:8.5s}
+  .heroV72Search{animation:none!important}
+  .heroV72Copy h1{letter-spacing:-1.4px!important}
+}
+@keyframes v73MobilePan{from{transform:scale(1.08) translate3d(-2%,0,0)}to{transform:scale(1.15) translate3d(2%,-1%,0)}}
+@media(prefers-reduced-motion:reduce){
+  .heroV72Image{animation:v73CinematicPan 18s ease-in-out infinite alternate!important}
+  .heroV72Scan{animation:v73ScanStrong 6s linear infinite!important}
+  .heroV72Visual:after{animation:v73LightSweep 9s ease-in-out infinite!important}
+}
