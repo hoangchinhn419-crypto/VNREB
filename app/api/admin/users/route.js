@@ -1,0 +1,2 @@
+import {NextResponse} from "next/server";import {cookies} from "next/headers";import {verifyToken} from "../../../../lib/auth";import {initDb,pool} from "../../../../lib/db";
+export async function GET(){const c=await cookies(),u=await verifyToken(c.get("vnreb_session")?.value||"");if(!u||!["SUPER_ADMIN","ADMIN"].includes(u.role))return NextResponse.json({error:"Không có quyền"},{status:403});await initDb();const r=await pool.query("SELECT id,full_name,email,phone,role,status,created_at FROM users ORDER BY created_at DESC LIMIT 500");return NextResponse.json({users:r.rows})}
