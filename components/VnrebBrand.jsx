@@ -1,12 +1,21 @@
 import Image from "next/image";
+
 export default function VnrebBrand({compact=false, light=false, className=""}) {
-  return <div className={`vnrebBrand ${compact?"compact":""} ${light?"light":""} ${className}`}>
-    <Image
-      src="/brand/vnreb-logo-premium.png"
-      alt="VNREB.JSC"
-      width={compact?154:214}
-      height={compact?80:108}
-      priority
-    />
-  </div>;
+  return (
+    <div className={`vnrebBrand ${compact ? "compact" : ""} ${light ? "light" : ""} ${className}`}>
+      <span className="brandSymbol">
+        <Image
+          src="/brand/vnreb-mark-better2.png"
+          alt="VNREB mark"
+          fill
+          sizes={compact ? "44px" : "58px"}
+          priority
+        />
+      </span>
+      <span className="brandText">
+        <b>VNREB<span>.JSC</span></b>
+        {!compact && <small>VIETNAM NATIONAL REAL ESTATE BROKERAGE &amp; DEVELOPMENT</small>}
+      </span>
+    </div>
+  );
 }
