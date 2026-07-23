@@ -14,7 +14,7 @@ export default function MotionRuntime(){
     },{threshold:.14,rootMargin:"0px 0px -8% 0px"});
     revealEls.forEach(el=>io.observe(el));
 
-    const hero=document.querySelector(".heroV71Visual");
+    const hero=document.querySelector(".heroV72Visual");
     const onMove=(e)=>{
       if(!hero||window.innerWidth<900)return;
       const r=hero.getBoundingClientRect();

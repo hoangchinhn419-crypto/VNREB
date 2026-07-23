@@ -88,41 +88,49 @@ export default function Home(){
       {menu&&<div className="mobileMenu"><a href="#projects">Dự án</a><a href="#map">Bản đồ</a><a href="#planning">Quy hoạch</a><a href="#knowledge">Kiến thức</a><a href="/ho-so-nang-luc">Về VNREB</a></div>}
     </header>
 
-    <section className="hero heroV71">
-      <div className="heroV71Aurora a"/><div className="heroV71Aurora b"/>
-      <div className="container heroV71Grid">
-        <div className="heroV71Copy" data-reveal>
-          <div className="heroBadge"><Sparkles size={15}/> Nền tảng bất động sản vận hành bằng AI</div>
-          <h1><span className="line">Tìm đúng bất động sản.</span><span className="line accent">Hiểu rõ trước khi quyết định.</span></h1>
+    <section className="hero heroV72">
+      <div className="heroV72Glow glowA"/><div className="heroV72Glow glowB"/>
+      <div className="container heroV72Grid">
+        <div className="heroV72Copy" data-reveal>
+          <div className="heroBadge"><Sparkles size={15}/> Nền tảng bất động sản ứng dụng AI</div>
+          <h1>
+            <span>Tìm đúng bất động sản.</span>
+            <strong>Hiểu rõ trước khi quyết định.</strong>
+          </h1>
           <p>Kết nối dữ liệu dự án, giá bán, quy hoạch, pháp lý và tư vấn chuyên gia trong một trải nghiệm thống nhất.</p>
-          <div className="heroV71Pills">
-            <span><Radar/>AI phân tích thị trường</span><span><Layers3/>Quy hoạch đa lớp</span><span><ShieldCheck/>Dữ liệu có nguồn</span>
+          <div className="heroV72Pills">
+            <span><Radar/>AI phân tích thị trường</span>
+            <span><Layers3/>Bản đồ và quy hoạch đa lớp</span>
+            <span><ShieldCheck/>Dữ liệu có nguồn kiểm chứng</span>
           </div>
-          <div className="searchBox heroV71Search">
-            <div className="searchMain"><Search size={20}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Tìm dự án, khu vực, loại hình hoặc nhu cầu..."/></div>
-            <select value={type} onChange={e=>setType(e.target.value)}><option>Tất cả</option><option>Căn hộ</option><option>Nhà phố</option><option>Nhà riêng</option><option>Đất nền</option></select>
-            <select value={budget} onChange={e=>setBudget(e.target.value)}><option>Tất cả</option><option>Dưới 3 tỷ</option><option>3–5 tỷ</option><option>Trên 5 tỷ</option></select>
+          <div className="searchBox heroV72Search">
+            <div className="searchMain"><Search size={20}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Tìm dự án, khu vực hoặc nhu cầu..."/></div>
+            <select value={type} onChange={e=>setType(e.target.value)}><option value="Tất cả">Tất cả loại hình</option><option>Căn hộ</option><option>Nhà phố</option><option>Nhà riêng</option><option>Đất nền</option></select>
+            <select value={budget} onChange={e=>setBudget(e.target.value)}><option value="Tất cả">Tất cả mức giá</option><option>Dưới 3 tỷ</option><option>3–5 tỷ</option><option>Trên 5 tỷ</option></select>
             <button><Search size={18}/> Tìm kiếm</button>
           </div>
-          <div className="quickTags"><span>Tìm kiếm phổ biến:</span><button onClick={()=>setQuery("Quận 12")}>Quận 12</button><button onClick={()=>setBudget("3–5 tỷ")}>3–5 tỷ</button><button onClick={()=>setType("Nhà phố")}>Nhà phố</button></div>
+          <div className="quickTags"><span>Gợi ý:</span><button onClick={()=>setQuery("Quận 12")}>Quận 12</button><button onClick={()=>setBudget("3–5 tỷ")}>3–5 tỷ</button><button onClick={()=>setType("Nhà phố")}>Nhà phố</button></div>
         </div>
 
-        <div className="heroV71Visual" data-reveal aria-label="Không gian đô thị AI VNREB">
-          <div className="heroV71Media"/>
-          <div className="scanLine"/>
-          <div className="projectHotspot hs1"><i/><div><b>THE RIVUS</b><span>Từ 150 tỷ · Quận 2</span></div></div>
-          <div className="projectHotspot hs2"><i/><div><b>THE BEVERLY</b><span>Từ 3,2 tỷ · Thủ Đức</span></div></div>
-          <div className="projectHotspot hs3"><i/><div><b>THE MANHATTAN</b><span>Từ 5,8 tỷ · Thủ Đức</span></div></div>
-          <div className="heroV71Mode"><span>Trải nghiệm dự án</span><div><button>2D</button><button className="active">3D</button><button><Play size={13}/> Video</button></div></div>
-          <div className="heroV71Glass"><span>VNREB MARKET INTELLIGENCE</span><b>Dữ liệu dự án · Quy hoạch · AI tư vấn</b><small>Thông tin quan trọng được gắn nguồn và cần chuyên viên xác minh.</small></div>
+        <div className="heroV72Visual" data-reveal aria-label="Khu đô thị hiện đại VNREB">
+          <div className="heroV72Image"/>
+          <div className="heroV72GridLines"/>
+          <div className="heroV72Scan"/>
+          <div className="heroV72Hotspot hot1"><i/><div><b>KHU ĐÔ THỊ VEN SÔNG</b><span>Dữ liệu giá và quy hoạch</span></div></div>
+          <div className="heroV72Hotspot hot2"><i/><div><b>CĂN HỘ CAO CẤP</b><span>AI đánh giá mức độ phù hợp</span></div></div>
+          <div className="heroV72Hotspot hot3"><i/><div><b>HẠ TẦNG KẾT NỐI</b><span>Phân tích tiềm năng khu vực</span></div></div>
+          <div className="heroV72Panel">
+            <span>VNREB MARKET INTELLIGENCE</span>
+            <b>Dự án · Quy hoạch · Pháp lý · AI tư vấn</b>
+            <small>Thông tin quan trọng luôn cần được chuyên viên xác minh trước khi giao dịch.</small>
+          </div>
         </div>
 
-        <div className="heroV71Stats" data-reveal>
-          <div><strong data-count="10000" data-suffix="+">0</strong><span>Dự án toàn quốc</span></div>
-          <div><strong data-count="500000" data-suffix="+">0</strong><span>Bất động sản</span></div>
-          <div><strong data-count="50" data-suffix="+">0</strong><span>Tỉnh thành</span></div>
-          <div><strong data-count="1" data-suffix="M+">0</strong><span>Lượt phân tích AI</span></div>
-          <div><strong data-count="99.9" data-suffix="%" data-decimals="1">0</strong><span>Dữ liệu chuẩn hóa</span></div>
+        <div className="heroV72Stats" data-reveal>
+          <div><strong data-count="1280" data-suffix="+">0</strong><span>Sản phẩm đã chuẩn hóa</span></div>
+          <div><strong data-count="86" data-suffix="">0</strong><span>Dự án đang theo dõi</span></div>
+          <div><strong data-count="9400" data-suffix="+">0</strong><span>Khách hàng quan tâm</span></div>
+          <div><strong data-count="24" data-suffix="/7">0</strong><span>Trợ lý AI hỗ trợ</span></div>
         </div>
       </div>
     </section>

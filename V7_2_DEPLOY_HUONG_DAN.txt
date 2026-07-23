@@ -1,0 +1,9 @@
+VNREB V7.2 CLEAN MOTION STABLE AI
+
+1. Giải nén ZIP.
+2. Upload toàn bộ nội dung bên trong lên repository GitHub VNREB hiện tại.
+3. Ghi đè file cũ và Commit changes.
+4. Không xóa PostgreSQL hoặc Render Web Service.
+5. Render > Manual Deploy > Clear build cache & deploy.
+6. Giữ nguyên DATABASE_URL, JWT_SECRET, OPENAI_API_KEY, OPENAI_MODEL, PORT, HOSTNAME.
+7. Sau deploy mở tab ẩn danh hoặc Ctrl + Shift + R.
