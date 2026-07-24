@@ -25,11 +25,11 @@ export async function POST(req) {
   let slug = slugify(b.slug || b.name);
   const exists = await pool.query("SELECT 1 FROM projects WHERE slug=$1",[slug]);
   if (exists.rowCount) slug += `-${Date.now().toString().slice(-6)}`;
-  const r = await pool.query(`INSERT INTO projects(name,slug,code,developer,project_type,status,visibility,province,district,address,latitude,longitude,price_from,price_to,currency,legal_status,progress,summary,description,amenities,featured,created_by)
-    VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22) RETURNING *`,[
-      b.name.trim(),slug,b.code||null,b.developer||null,b.project_type||null,b.status||"DRAFT",b.visibility||"PUBLIC",b.province||null,b.district||null,b.address||null,
+  const r = await pool.query(`INSERT INTO projects(name,slug,code,developer,legal_name,project_type,status,visibility,province,district,address,latitude,longitude,price_from,price_to,currency,legal_status,progress,summary,description,amenities,project_facts,legal_checklist,progress_timeline,ai_profile,featured,created_by)
+    VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24,$25,$26,$27) RETURNING *`,[
+      b.name.trim(),slug,b.code||null,b.developer||null,b.legal_name||null,b.project_type||null,b.status||"DRAFT",b.visibility||"PUBLIC",b.province||null,b.district||null,b.address||null,
       b.latitude||null,b.longitude||null,b.price_from||null,b.price_to||null,b.currency||"VND",b.legal_status||null,b.progress||null,b.summary||null,b.description||null,
-      Array.isArray(b.amenities)?b.amenities:[],!!b.featured,user.sub
+      Array.isArray(b.amenities)?b.amenities:[],b.project_facts&&typeof b.project_facts==="object"?b.project_facts:{},Array.isArray(b.legal_checklist)?b.legal_checklist:[],Array.isArray(b.progress_timeline)?b.progress_timeline:[],b.ai_profile&&typeof b.ai_profile==="object"?b.ai_profile:{},!!b.featured,user.sub
     ]);
   await audit(user.sub,"PROJECT_CREATE","PROJECT",r.rows[0].id,{name:b.name});
   return NextResponse.json({project:r.rows[0]},{status:201});
