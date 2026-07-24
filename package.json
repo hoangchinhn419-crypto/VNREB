@@ -1,6 +1,6 @@
 {
-  "name": "vnreb-v7-2-clean-motion-stable-ai",
-  "version": "7.2.0",
+  "name": "vnreb-v8-project-admin-digital-passport",
+  "version": "8.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",

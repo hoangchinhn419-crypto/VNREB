@@ -1,0 +1,51 @@
+"use client";
+import { useEffect, useMemo, useState } from "react";
+import { Building2, FileText, Film, Image as ImageIcon, LoaderCircle, Plus, Save, Search, Trash2, UploadCloud, X } from "lucide-react";
+
+const blank={name:"",code:"",developer:"",project_type:"Căn hộ",status:"DRAFT",visibility:"PUBLIC",province:"",district:"",address:"",price_from:"",price_to:"",legal_status:"",progress:"",summary:"",description:"",amenities:[],featured:false};
+const money=v=>v?new Intl.NumberFormat("vi-VN").format(Number(v))+" ₫":"—";
+
+export default function ProjectAdmin(){
+ const [projects,setProjects]=useState([]),[selected,setSelected]=useState(null),[form,setForm]=useState(blank),[detail,setDetail]=useState(null),[loading,setLoading]=useState(true),[saving,setSaving]=useState(false),[msg,setMsg]=useState(""),[q,setQ]=useState("");
+ const filtered=useMemo(()=>projects.filter(p=>(p.name+" "+(p.developer||"")+" "+(p.province||"")).toLowerCase().includes(q.toLowerCase())),[projects,q]);
+ async function load(){setLoading(true);const d=await fetch("/api/admin/projects").then(r=>r.json());setProjects(d.projects||[]);setLoading(false)}
+ useEffect(()=>{load()},[]);
+ async function openProject(p){setSelected(p.id);const d=await fetch(`/api/admin/projects/${p.id}`).then(r=>r.json());setDetail(d);setForm({...blank,...d.project,amenities:d.project.amenities||[]})}
+ function newProject(){setSelected("new");setDetail({media:[],documents:[]});setForm(blank)}
+ async function save(e){e.preventDefault();setSaving(true);setMsg("");const url=selected==="new"?"/api/admin/projects":`/api/admin/projects/${selected}`;const method=selected==="new"?"POST":"PATCH";const r=await fetch(url,{method,headers:{"Content-Type":"application/json"},body:JSON.stringify({...form,price_from:form.price_from||null,price_to:form.price_to||null})});const d=await r.json();setSaving(false);if(!r.ok){setMsg(d.error||"Không thể lưu");return}setMsg("Đã lưu dự án");await load();if(selected==="new")await openProject(d.project);else await openProject(d.project)}
+ async function remove(){if(!confirm("Ẩn dự án này khỏi hệ thống?"))return;await fetch(`/api/admin/projects/${selected}`,{method:"DELETE"});setSelected(null);setDetail(null);setForm(blank);await load()}
+ async function upload(kind,file,title="",isHero=false,category="OTHER",visibility="PUBLIC"){if(!file||selected==="new"){setMsg(selected==="new"?"Hãy lưu dự án trước khi tải tệp":"Chưa chọn tệp");return}setMsg("Đang tải tệp...");const fd=new FormData();fd.append("file",file);fd.append("kind",kind);fd.append("title",title);fd.append("isHero",String(isHero));fd.append("category",category);fd.append("visibility",visibility);const r=await fetch(`/api/admin/projects/${selected}/media`,{method:"POST",body:fd});const d=await r.json();setMsg(r.ok?"Tải lên thành công":d.error||"Tải lên thất bại");if(r.ok)await openProject({id:selected})}
+ return <div className="v8AdminGrid">
+  <section className="v8ProjectList">
+   <div className="v8ListHead"><div><span className="v8Eyebrow">V8.0 PROJECT ADMIN</span><h2>Quản lý dự án</h2></div><button className="v8Primary" onClick={newProject}><Plus size={17}/>Tạo dự án</button></div>
+   <div className="v8Search"><Search size={17}/><input placeholder="Tìm dự án, chủ đầu tư..." value={q} onChange={e=>setQ(e.target.value)}/></div>
+   <div className="v8ProjectRows">{loading?<div className="v8Empty"><LoaderCircle className="spin"/>Đang tải dữ liệu...</div>:filtered.length?filtered.map(p=><button key={p.id} className={`v8ProjectRow ${selected===p.id?"active":""}`} onClick={()=>openProject(p)}>
+    <div className="v8Thumb">{p.hero_url?<img src={p.hero_url} alt=""/>:<Building2/>}</div><div><b>{p.name}</b><span>{p.developer||"Chưa có chủ đầu tư"}</span><small>{p.district||p.province||"Chưa cập nhật vị trí"}</small></div><aside><em className={`status ${String(p.status).toLowerCase()}`}>{p.status}</em><small>{p.media_count||0} media · {p.document_count||0} tài liệu</small></aside>
+   </button>):<div className="v8Empty">Chưa có dự án. Bấm “Tạo dự án”.</div>}</div>
+  </section>
+  <section className="v8Editor">
+   {!selected?<div className="v8Welcome"><Building2 size={44}/><h2>Project Digital Passport</h2><p>Chọn một dự án hoặc tạo mới để quản lý thông tin, hình ảnh, video và hồ sơ PDF.</p></div>:<>
+    <div className="v8EditorHead"><div><span className="v8Eyebrow">HỒ SƠ SỐ DỰ ÁN</span><h2>{selected==="new"?"Tạo dự án mới":form.name}</h2></div><div className="v8HeadActions">{selected!=="new"&&<a href={`/du-an/${form.slug}`} target="_blank">Xem trang công khai</a>}{selected!=="new"&&<button className="v8Danger" onClick={remove}><Trash2 size={16}/></button>}</div></div>
+    {msg&&<div className="v8Notice">{msg}<button onClick={()=>setMsg("")}><X size={14}/></button></div>}
+    <form className="v8Form" onSubmit={save}>
+      <div className="v8FormSection"><h3>Thông tin cơ bản</h3><div className="v8Fields two">
+       <label>Tên dự án<input required value={form.name||""} onChange={e=>setForm({...form,name:e.target.value})}/></label><label>Mã dự án<input value={form.code||""} onChange={e=>setForm({...form,code:e.target.value})}/></label>
+       <label>Chủ đầu tư<input value={form.developer||""} onChange={e=>setForm({...form,developer:e.target.value})}/></label><label>Loại hình<select value={form.project_type||""} onChange={e=>setForm({...form,project_type:e.target.value})}><option>Căn hộ</option><option>Nhà phố</option><option>Biệt thự</option><option>Đất nền</option><option>Thương mại</option><option>Khu đô thị</option></select></label>
+       <label>Trạng thái<select value={form.status||"DRAFT"} onChange={e=>setForm({...form,status:e.target.value})}><option value="DRAFT">Bản nháp</option><option value="COMING_SOON">Sắp mở bán</option><option value="SELLING">Đang mở bán</option><option value="PUBLISHED">Đã xuất bản</option><option value="SOLD_OUT">Đã bán hết</option></select></label><label>Quyền xem<select value={form.visibility||"PUBLIC"} onChange={e=>setForm({...form,visibility:e.target.value})}><option value="PUBLIC">Công khai</option><option value="INTERNAL">Nội bộ</option><option value="PRIVATE">Bảo mật</option></select></label>
+      </div></div>
+      <div className="v8FormSection"><h3>Vị trí và giá</h3><div className="v8Fields two"><label>Tỉnh/Thành<input value={form.province||""} onChange={e=>setForm({...form,province:e.target.value})}/></label><label>Quận/Huyện<input value={form.district||""} onChange={e=>setForm({...form,district:e.target.value})}/></label><label className="wide">Địa chỉ<input value={form.address||""} onChange={e=>setForm({...form,address:e.target.value})}/></label><label>Giá từ<input type="number" value={form.price_from||""} onChange={e=>setForm({...form,price_from:e.target.value})}/><small>{money(form.price_from)}</small></label><label>Giá đến<input type="number" value={form.price_to||""} onChange={e=>setForm({...form,price_to:e.target.value})}/><small>{money(form.price_to)}</small></label></div></div>
+      <div className="v8FormSection"><h3>Pháp lý và nội dung</h3><div className="v8Fields"><label>Pháp lý<textarea rows="3" value={form.legal_status||""} onChange={e=>setForm({...form,legal_status:e.target.value})}/></label><label>Tiến độ<textarea rows="3" value={form.progress||""} onChange={e=>setForm({...form,progress:e.target.value})}/></label><label>Tóm tắt<textarea rows="3" value={form.summary||""} onChange={e=>setForm({...form,summary:e.target.value})}/></label><label>Mô tả chi tiết<textarea rows="7" value={form.description||""} onChange={e=>setForm({...form,description:e.target.value})}/></label></div></div>
+      <div className="v8SaveBar"><label className="v8Check"><input type="checkbox" checked={!!form.featured} onChange={e=>setForm({...form,featured:e.target.checked})}/>Dự án nổi bật</label><button className="v8Primary" disabled={saving}>{saving?<LoaderCircle className="spin" size={17}/>:<Save size={17}/>}Lưu dự án</button></div>
+    </form>
+    {selected!=="new"&&<div className="v8MediaCenter"><div className="v8SectionTitle"><div><span className="v8Eyebrow">MEDIA CENTER</span><h3>Ảnh, video và tài liệu PDF</h3></div><p>Video tối đa 300MB · PDF 30MB · Ảnh 15MB</p></div><div className="v8UploadCards">
+      <UploadCard icon={<ImageIcon/>} title="Tải ảnh" accept="image/*" onUpload={(f,t,h)=>upload("IMAGE",f,t,h)} hero/>
+      <UploadCard icon={<Film/>} title="Tải video" accept="video/mp4,video/webm,video/quicktime" onUpload={(f,t)=>upload("VIDEO",f,t,false)}/>
+      <UploadCard icon={<FileText/>} title="Tải PDF" accept="application/pdf" onUpload={(f,t)=>upload("DOCUMENT",f,t,false,"LEGAL")}/>
+    </div><MediaGallery media={detail?.media||[]} documents={detail?.documents||[]}/></div>}
+   </>}
+  </section>
+ </div>
+}
+
+function UploadCard({icon,title,accept,onUpload,hero}){const[file,setFile]=useState(null),[name,setName]=useState(""),[isHero,setHero]=useState(false);return <div className="v8UploadCard"><div className="v8UploadIcon">{icon}</div><b>{title}</b><input placeholder="Tiêu đề hiển thị" value={name} onChange={e=>setName(e.target.value)}/><label className="v8File"><UploadCloud size={16}/><span>{file?file.name:"Chọn tệp"}</span><input type="file" accept={accept} onChange={e=>setFile(e.target.files?.[0]||null)}/></label>{hero&&<label className="v8MiniCheck"><input type="checkbox" checked={isHero} onChange={e=>setHero(e.target.checked)}/>Đặt làm ảnh hero</label>}<button disabled={!file} onClick={()=>{onUpload(file,name,isHero);setFile(null);setName("")}}>Tải lên</button></div>}
+function MediaGallery({media,documents}){return <div className="v8Gallery"><div><h4>Thư viện media ({media.length})</h4><div className="v8MediaGrid">{media.map(m=><article key={m.id}>{m.media_type==="VIDEO"?<video src={m.url} controls preload="metadata"/>:<img src={m.url} alt={m.title||"Ảnh dự án"}/>}<b>{m.title||m.media_type}</b><span>{m.is_hero?"Ảnh hero · ":""}{m.visibility}</span></article>)}{!media.length&&<p>Chưa có ảnh hoặc video.</p>}</div></div><div><h4>Tài liệu ({documents.length})</h4><div className="v8Docs">{documents.map(d=><a key={d.id} href={d.versions?.[0]?.file_url} target="_blank"><FileText size={18}/><span><b>{d.title}</b><small>{d.category} · phiên bản {d.current_version}</small></span></a>)}{!documents.length&&<p>Chưa có tài liệu.</p>}</div></div></div>}

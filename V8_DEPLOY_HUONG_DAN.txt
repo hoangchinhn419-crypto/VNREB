@@ -1,0 +1,48 @@
+VNREB V8.0 - PROJECT ADMIN & DIGITAL PASSPORT
+
+PHAM VI DA NANG CAP
+- Quan ly du an: tao, sua, xoa mem, trang thai, quyen xem.
+- Ho so so du an: chu dau tu, vi tri, gia, phap ly, tien do, mo ta.
+- Upload anh, video MP4/WebM/MOV va tai lieu PDF.
+- Media Center va thu vien tai lieu.
+- Trang chi tiet cong khai: /du-an/[slug].
+- Audit log cho tao/sua/xoa/upload.
+- Cau truc du lieu san sang cho Project Data Room va AI doc du lieu.
+
+CACH CAP NHAT
+1. Sao luu repository dang chay.
+2. Ghi de toan bo source V8.0 len repository hien tai.
+3. Commit va push GitHub.
+4. Tren Render chon Manual Deploy -> Deploy latest commit.
+5. Lan dau V8 co thay doi database schema, KHONG xoa PostgreSQL.
+6. KHONG can Clear build cache tru khi Render van build ban cu.
+
+LUU TRU MEDIA
+A. Che do production de xuat:
+- Tao mot upload gateway cho Cloudflare R2/S3.
+- Dat bien moi truong:
+  MEDIA_UPLOAD_ENDPOINT=https://.../upload
+  MEDIA_UPLOAD_TOKEN=...
+- Gateway nhan binary body, header x-file-key va tra JSON {"url":"https://..."}.
+
+B. Neu chua cau hinh kho media:
+- He thong luu vao public/uploads de demo/local.
+- Tren Render filesystem co the mat khi redeploy, khong dung cho du lieu production lau dai.
+
+GIOI HAN MAC DINH
+- Anh: 15 MB
+- PDF: 30 MB
+- Video: 300 MB
+
+CAC BIEN MOI TRUONG CU GIU NGUYEN
+DATABASE_URL
+JWT_SECRET
+ADMIN_SETUP_CODE
+OPENAI_API_KEY
+OPENAI_MODEL
+NODE_ENV
+PORT
+HOSTNAME
+
+GHI CHU KIEM THU
+- Moi truong tao file khong hoan tat npm install do timeout mang, nen can de Render chay build chinh thuc.
